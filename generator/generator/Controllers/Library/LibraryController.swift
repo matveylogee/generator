@@ -47,6 +47,7 @@ class LibraryController: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateFilteredFiles()
         tableView.reloadData()
     }
     
@@ -100,7 +101,7 @@ extension LibraryController {
         cell.delegate = self
         
         // Задаем название файла для отображения
-        let pdfFile = filesStack.getAllPDFFiles()[indexPath.row]
+        let pdfFile = filteredFiles[indexPath.row] // Используем filteredFiles, а не filesStack.getAllPDFFiles()
         cell.previewCellButton.setTitle(pdfFile.fileName, for: .normal)
         cell.pdfURL = pdfFile.fileURL!
         cell.backgroundColor = UIColor(named: "tableViewColor")
